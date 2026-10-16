@@ -1,0 +1,4 @@
+This repository is an independent add-on and is not affiliated with or endorsed by Jake Stanger, Discord, or Cloudflare.
+
+It fetches the upstream mpd-discord-rpc project at install time. The upstream project has a separate MIT license:
+https://github.com/JakeStanger/mpd-discord-rpc

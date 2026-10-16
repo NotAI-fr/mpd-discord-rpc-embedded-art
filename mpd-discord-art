@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SERVICE="mpd-discord-rpc.service"
+case "${1:-help}" in
+  status) exec systemctl --user status "$SERVICE" --no-pager ;;
+  logs) exec journalctl --user -fu "$SERVICE" ;;
+  restart) exec systemctl --user restart "$SERVICE" ;;
+  start) exec systemctl --user start "$SERVICE" ;;
+  stop) exec systemctl --user stop "$SERVICE" ;;
+  url)
+    url="$(journalctl --user -u "$SERVICE" -o cat --no-pager 2>/dev/null | grep -Eo 'https://[[:alnum:]-]+\.trycloudflare\.com' | tail -n 1 || true)"
+    if [[ -n "$url" ]]; then printf '%s\n' "$url"; else echo "No Quick Tunnel URL logged yet. Try: mpd-discord-art logs" >&2; exit 1; fi
+    ;;
+  help|--help|-h)
+    cat <<'EOF'
+Usage: mpd-discord-art <command>
+
+Commands:
+  status   Show service status
+  logs     Follow logs live
+  url      Print latest Quick Tunnel URL
+  restart  Restart the RPC, artwork server, and tunnel
+  start    Start the setup
+  stop     Stop the setup
+EOF
+    ;;
+  *) echo "Unknown command: $1" >&2; exec "$0" help ;;
+esac
