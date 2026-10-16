@@ -30,33 +30,16 @@ yay -S mpd-discord-rpc
 
 The package/source names can differ on other distributions. This repository does **not** install or configure MPD itself, install Discord, or install the upstream `mpd-discord-rpc` package for you.
 
-## Publish this folder as your GitHub repository
-
-1. Create an **empty** repository on GitHub named `mpd-discord-rpc-embedded-art` (do not pre-create a README or license there; this folder already contains both).
-2. From this project folder, run the following, replacing the owner name:
-
-```bash
-git init
-git add .
-git commit -m "Initial release"
-git branch -M main
-git remote add origin https://github.com/<YOUR-USERNAME>/mpd-discord-rpc-embedded-art.git
-git push -u origin main
-```
-
-After it is published, other machines can follow the install command below using the real repository URL.
 
 ## Install
 
 Once requirements are installed:
 
 ```bash
-git clone https://github.com/<YOUR-USERNAME>/mpd-discord-rpc-embedded-art.git
+git clone https://github.com/NotAI-fr/mpd-discord-rpc-embedded-art.git
 cd mpd-discord-rpc-embedded-art
 bash install.sh
 ```
-
-Replace `<YOUR-USERNAME>` with the GitHub account that hosts this repository. The installer:
 
 1. Checks required commands and confirms the upstream user service exists.
 2. Clones upstream `mpd-discord-rpc` at `v1.11.0` for a fresh install, then applies a guarded patch. If you've already got the source clone from an earlier install, it reuses that clone.
